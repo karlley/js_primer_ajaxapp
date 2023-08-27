@@ -1,12 +1,11 @@
-function main() {
-  fetchUserInfo("js-primer-example")
-    // ここではJSONオブジェクトで解決されるPromise
-    .then((userInfo) => createView(userInfo))
-    //ここではHTML文字列で解決されるPromise
-    .then((view) => displayView(view))
-    .catch((error) => {
-      console.error(`エラーが発生しました (${error}`);
-    });
+async function main() {
+  try {
+    const userInfo = await fetchUserInfo("js-primer-example");
+    const view = createView(userInfo);
+    displayView(view);
+  } catch (error) {
+    console.error(`エラーが発生しました (${error}`); //通信エラー時の処理
+  }
 }
 
 function fetchUserInfo(userId) {
